@@ -12,8 +12,7 @@ Need to use sl7 machines
 cmsrel CMSSW_10_2_13
 cd CMSSW_10_2_13/src/
 cmsenv
-git clone https://github.com/cms-analysis/HiggsAnalysis-CombinedLimit.git HiggsAnalysis/CombinedLimit
+git clone https://github.com/Michael-Krohn/HiggsAnalysis-CombinedLimit.git -b HNWR/v8.0.1 HiggsAnalysis/CombinedLimitcd HiggsAnalysis/CombinedLimit
 cd HiggsAnalysis/CombinedLimit
-source env_standalone.sh 
-make -j 8; make # second make fixes compilation error of first
+scram b -j8
 ```
