@@ -12,6 +12,12 @@ To run limits locally:
 '''
 combine -M AsymptoticLimits --run blind $CARDNAME
 '''
+
+To run all limits on condor:
+
+'''
+
+'''
 Put below rootfiles inside $CMSSE_BASE/src/HiggsAnalysis/CombinedLimit/HNWR_13TeV/2016/MergedRootfiles/ :
 
 EE_Boosted_SR_Bkgd.root
