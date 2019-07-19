@@ -16,3 +16,5 @@ git clone https://github.com/Michael-Krohn/HiggsAnalysis-CombinedLimit.git -b HN
 cd HiggsAnalysis/CombinedLimit
 scram b -j8
 ```
+
+Our limit setting code is in HNWR_13TeV directory
