@@ -17,4 +17,4 @@ cd HiggsAnalysis/CombinedLimit
 scram b -j8
 ```
 
-Our limit setting code is in HNWR_13TeV directory
+Our limit setting code is in HNWR_13TeV/ directory
