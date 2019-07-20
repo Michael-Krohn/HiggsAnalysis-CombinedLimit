@@ -2,8 +2,10 @@ The unmodified datacards and workspaces from SNU are in Ingredients.
 
 To modify the datacards and workspaces. This will place the new ones in Ingredients_Rebin:
 ```
-python Rebin.py #Both scripts still need modifications to correct issues in datacards
+python Rebin.py
 python CorrectDataCards.py
+cd Ingredients_ReBin/
+python CombineCards.py
 ```
 
 To run limits locally:
