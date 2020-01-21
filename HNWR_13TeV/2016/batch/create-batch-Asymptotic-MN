@@ -1,0 +1,120 @@
+#!/usr/bin/env python
+
+import os
+import argparse
+import datetime
+
+parser = argparse.ArgumentParser(description='option')
+parser.add_argument('-n', dest='Name', default="")
+parser.add_argument('-l', dest='RunList')
+args = parser.parse_args()
+
+pwd = os.getcwd()
+CMSSW_BASE = os.environ['CMSSW_BASE']
+SCRAM_ARCH = os.environ['SCRAM_ARCH']
+
+cards = open(args.RunList).readlines()
+NCARD = len(cards)
+
+JobStartTime = datetime.datetime.now()
+timestamp =  JobStartTime.strftime('%Y_%m_%d_%H%M%S')
+
+JobName = timestamp
+if args.Name!="":
+  JobName += "__"+args.Name
+
+FullPathJobDir = pwd+'/'+JobName+'/'
+os.system('mkdir -p '+JobName+'/output/')
+
+#### first write the executable
+
+executable_filename = 'Combine_'+JobName+'.sh'
+executable = open(pwd+'/'+JobName+'/'+executable_filename,'w')
+print>>executable,'''#!/bin/bash
+SECTION=`printf $1`
+WORKDIR=`pwd`
+
+#### Don't make root history
+export ROOT_HIST=0
+
+#### use cvmfs for root ####
+####./cmsset_default.sh ####
+echo "Starting job on " `date` #Date/time of start of job
+echo "Running on: `uname -a`" #Condor job is running on this node
+echo "System software: `cat /etc/redhat-release`" #Operating System on that node
+source /cvmfs/cms.cern.ch/cmsset_default.sh 
+export SCRAM_ARCH={0}
+tar -xf CMSSW10213.tgz
+rm CMSSW10213.tgz
+cd CMSSW_10_2_13/src
+echo "pwd"
+pwd
+echo "CMSSW: "$CMSSW_BASE
+echo "@@@@ SCRAM_ARCH = "$SCRAM_ARCH
+echo "@@@@ scram..."
+scramv1 b ProjectRename
+#eval `scramv1 b ProjectRename -sh`
+eval `scramv1 runtime -sh`
+cd HiggsAnalysis/CombinedLimit/HNWR_13TeV/2016/Ingredients_MN/
+cp ../../../../../../../run_${{SECTION}}.sh .
+source run_${{SECTION}}.sh
+###xrdcp higgsCombineTest.AsymptoticLimits.mH120.root root://cmseos.fnal.gov//store/user/mkrohn/TEST/higgsCombineTest.AsymptoticLimits.mH120_${{SECTION}}.root'''.format(SCRAM_ARCH)
+executable.close()
+
+#### Write jds
+
+jdsfile = open(pwd+'/'+JobName+'/submit.sh','w')
+print>>jdsfile,'''Executable = {1}
+universe   = vanilla
+Requirements = OpSys == "LINUX"&& (Arch != "DUMMY" )
+arguments  = $(Process)
+Log = condor_$(Process).log
+use_x509userproxy = true
+x509userproxy = $ENV(X509_USER_PROXY)
+Should_Transfer_Files = YES
+WhenToTransferOutput = ON_EXIT
+Transfer_Input_Files = /uscms_data/d3/mkrohn/WR/SNU_Plotting/CMSSW_10_2_13/src/HiggsAnalysis/CombinedLimit/HNWR_13TeV/2016/batch/{2}/run_$(Process).sh, /uscms_data/d3/mkrohn/WR/SNU_Plotting/CMSSW10213.tgz
+Output = job_$(Process).log
+Error = job_$(Process).err
+#transfer_output_files = higgsCombineTest.AsymptoticLimits.mH120.root
+#transfer_output_remaps = "higgsCombineTest.AsymptoticLimits.mH120.root = output/hists_$(Process).root"
+queue {0}
+'''.format(str(NCARD), executable_filename, JobName)
+jdsfile.close()
+
+#### write job sh file
+
+for i in range(0,NCARD):
+
+  card = cards[i].strip('\n')
+
+  runfile = open(pwd+'/'+JobName+'/run_'+str(i)+'.sh','w')
+
+  shortcard = card.split('/')[-1]
+
+  runfile.write('echo "Input datacard '+shortcard+'"\n')
+
+  #### AymptoticLimits
+  #runfile.write('combine -M AsymptoticLimits --run blind '+card+'\n')
+
+  #### Full CLs
+  print>>runfile,'''combine -M AsymptoticLimits --run blind {0}
+'''.format(card)
+
+
+  runfile.close()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
