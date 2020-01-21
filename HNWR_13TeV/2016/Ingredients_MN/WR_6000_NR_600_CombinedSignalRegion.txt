@@ -1,0 +1,33 @@
+Combination of Name1=WR_6000_NR_600_ResolvedSignalRegion.txt  Name2=WR_6000_NR_600_BoostedSignalRegion.txt
+imax 2 number of bins
+jmax 6 number of processes minus 1
+kmax 15 number of nuisance parameters
+----------------------------------------------------------------------------------------------------------------------------------
+shapes *      Name1  WR_NR_MuMuJJ_ResolvedSignalRegion.root MuMuJJ/$PROCESS MuMuJJ/$PROCESS_$SYSTEMATIC
+shapes *      Name2  WR_NR_MuMuJJ_BoostedSignalRegion.root MuMuJJ/$PROCESS MuMuJJ/$PROCESS_$SYSTEMATIC
+----------------------------------------------------------------------------------------------------------------------------------
+bin          Name1  Name2
+observation  -1     -1   
+----------------------------------------------------------------------------------------------------------------------------------
+bin                                 Name1           Name1           Name1           Name1           Name1           Name1           Name1           Name2           Name2           Name2           Name2           Name2           Name2           Name2         
+process                             WR_6000_NR_600  DiBoson         ttV             ST              EMu             DY              TriBoson        WR_6000_NR_600  DiBoson         ttV             ST              EMu             DY              TriBoson      
+process                             0               1               2               3               4               5               6               0               1               2               3               4               5               6             
+rate                                -1              -1              -1              -1              -1              -1              -1              -1              -1              -1              -1              -1              -1              -1            
+----------------------------------------------------------------------------------------------------------------------------------
+AlphaS                  shapeN2     1.0             -               -               -               -               -               -               1.0             -               -               -               -               -               -             
+DYNorm                  lnN         -               -               -               -               -               1.03            -               -               -               -               -               -               1.03            -             
+JEC                     lnN         1.004           1.0             1.005           1.011           -               1.031           1.007           1.001           1.0             1.01            1.037           -               1.017           1.037         
+JER                     lnN         1.018           1.159           1.022           1.054           -               1.064           1.037           1.009           1.099           1.03            1.043           -               1.097           1.106         
+LSF                     lnN         -               -               -               -               -               -               -               1.086           1.086           1.086           1.086           -               1.247           1.086         
+MuID                    lnN         -               -               -               -               -               -               -               1.312           1.017           1.018           1.015           -               1.029           1.035         
+MuResID                 lnN         1.142           1.027           1.018           1.025           -               1.024           1.023           -               -               -               -               -               -               -             
+MuResol                 lnN         1.011           1.0             1.003           1.011           -               1.003           1.001           1.02            1.0             1.004           1.0             -               1.018           1.037         
+MuTrig                  lnN         1.008           1.001           1.001           1.001           -               1.002           1.002           1.064           1.011           1.013           1.012           -               1.021           1.035         
+PDF                     shapeN2     1.0             -               -               -               -               -               -               1.0             -               -               -               -               -               -             
+PU                      lnN         1.006           1.029           1.003           1.028           -               1.018           1.012           1.017           1.007           1.023           1.015           -               1.016           1.038         
+Scale                   lnN         1.005           -               -               -               -               -               -               1.022           -               -               -               -               -               -             
+Syst                    shapeN2     -               -               -               -               1.0             -               -               -               -               -               -               1.0             -               -             
+Zweight                 lnN         -               -               -               -               -               1.21            -               -               -               -               -               -               1.234           -             
+lumi                    lnN         1.025           1.025           1.025           1.025           1.025           1.025           1.025           1.025           1.025           1.025           1.025           1.025           1.025           1.025         
+Name2 autoMCStats 0 0 1
+Name1 autoMCStats 0 0 1

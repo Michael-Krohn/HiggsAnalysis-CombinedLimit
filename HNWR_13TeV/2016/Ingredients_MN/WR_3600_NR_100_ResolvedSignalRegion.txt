@@ -1,0 +1,28 @@
+imax 1 number of channels
+jmax * number of processes minus 1
+kmax * number of nuisance parameters
+------------------------------------------------------------
+shapes * ResolvedSignalRegion WR_NR_MuMuJJ_ResolvedSignalRegion.root MuMuJJ/$PROCESS MuMuJJ/$PROCESS_$SYSTEMATIC
+------------------------------------------------------------
+bin             ResolvedSignalRegion
+observation     -1.0
+------------------------------------------------------------
+bin ResolvedSignalRegion ResolvedSignalRegion ResolvedSignalRegion ResolvedSignalRegion ResolvedSignalRegion ResolvedSignalRegion ResolvedSignalRegion
+process WR_3600_NR_100 ST DY DiBoson TriBoson ttV EMu
+process 0 1 2 3 4 5 6
+rate -1 -1 -1 -1 -1 -1 -1
+------------------------------------------------------------
+lumi	lnN 1.025 1.025 1.025 1.025 1.025 1.025 1.025
+JEC	lnN 1.023 1.011 1.031 1.000 1.007 1.005 -
+JER	lnN 1.054 1.054 1.064 1.159 1.037 1.022 -
+PU	lnN 1.014 1.028 1.018 1.029 1.012 1.003 -
+MuResID	lnN	1.111	1.025	1.024	1.027	1.023	1.018	-
+MuResol	lnN	1.003	1.011	1.003	1.000	1.001	1.003	-
+MuTrig	lnN	1.007	1.001	1.002	1.001	1.002	1.001	-
+Zweight	lnN	-	-	1.210	-	-	-	-
+Scale	lnN	1.027	-	-	-	-	-	-
+PDF	shapeN2	1	-	-	-	-	-	-
+AlphaS	shapeN2	1	-	-	-	-	-	-
+DYNorm lnN - - 1.03 - - - -
+Syst shapeN2 - - - - - - 1
+* autoMCStats 0
